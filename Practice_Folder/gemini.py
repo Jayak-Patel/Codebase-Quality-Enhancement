@@ -7,7 +7,7 @@ client = genai.Client(
 
 completion = client.models.generate_content(
   model="gemini-2.0-flash",
-  contents="Please write short code that will print hello 5 times in python."
+  contents="Please write short code that take in a string and output the reverse of that string in python."
 
 )
 
@@ -19,18 +19,27 @@ language, groups[1] = groups[1].split(maxsplit=1)
 
 if(language == "python"):
 
-    file_path = "test.py" # Can be an absolute or relative path
+    file_path = "testFolder/pythonTest.py"
 
     with open(file_path, "w") as file:
         file.write(groups[1])
 
     print(f"String saved to {file_path}")
     try:
-        import test #Essentially runs the code that was just written.
+        from testFolder import pythonTest #Essentially runs the code that was just written.
     except Exception as e:
         print(f"Error: {e}")
     else:
         print("Code seemed to work without any issues.")
+elif(language == "java"):
+  file_path = "testFolder/javaTest.java"
+  with open(file_path, "w") as file:
+      file.write(groups[1])
 
-print(completion.text)
-
+  print(f"String saved to {file_path}")
+  try:
+      from testFolder import javaTest #Essentially runs the code that was just written.
+  except Exception as e:
+      print(f"Error: {e}")
+  else:
+      print("Code seemed to work without any issues.")

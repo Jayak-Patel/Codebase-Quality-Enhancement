@@ -10,6 +10,6 @@ def reverse_string(s):
   return s[::-1]
 
 # Example usage:
-my_string = "hello"
-reversed_string = reverse_string(my_string)
+string = "hello"
+reversed_string = reverse_string(string)
 print(reversed_string)  # Output: olleh
