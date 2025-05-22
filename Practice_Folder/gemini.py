@@ -1,5 +1,13 @@
 
 from google import genai
+import subprocess
+import os
+file_path = os.path.join("..", "..", "sonarqube", "server", "sonar-main", "src", "main", "java", "org", "sonar", "application", "process", "EsManagedProcess.java")
+file = open(file_path, "r")
+code = file.read()
+
+print(code)
+
 
 client = genai.Client(
   api_key="AIzaSyAigsYXpwyvIixD3vMj4suedyh6E02NJGI"
@@ -7,11 +15,12 @@ client = genai.Client(
 
 completion = client.models.generate_content(
   model="gemini-2.0-flash",
-  contents="Please write short code that take in a string and output the reverse of that string in python."
+  contents= str(code) + ". Here is some code that has been written in java. Please make this code look more professional."
 
 )
 
 text = completion.text
+print(text)
 groups = text.split("```") 
 print(groups)  # Output: [Description, code, excess]
 print(groups[1]) # Seems to have the type of language it is in, then the code.
@@ -38,7 +47,9 @@ elif(language == "java"):
 
   print(f"String saved to {file_path}")
   try:
-      from testFolder import javaTest #Essentially runs the code that was just written.
+      cmd = '/path/to/javac/javac ' + file_path 
+      proc = subprocess.Popen(cmd, shell=True)
+
   except Exception as e:
       print(f"Error: {e}")
   else:

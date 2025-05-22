@@ -9,7 +9,7 @@ def reverse_string(s):
   """
   return s[::-1]
 
-# Example usage:
+# Example usage
 string = "hello"
 reversed_string = reverse_string(string)
 print(reversed_string)  # Output: olleh
