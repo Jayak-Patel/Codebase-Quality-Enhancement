@@ -47,7 +47,7 @@ elif(language == "java"):
 
   print(f"String saved to {file_path}")
   try:
-      cmd = '/path/to/javac/javac ' + file_path 
+      cmd = 'javac ' + file_path 
       proc = subprocess.Popen(cmd, shell=True)
 
   except Exception as e:
