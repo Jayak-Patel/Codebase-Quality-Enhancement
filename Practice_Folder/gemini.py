@@ -2,24 +2,41 @@
 from google import genai
 import subprocess
 import os
-file_path = os.path.join("..", "..", "sonarqube", "server", "sonar-main", "src", "main", "java", "org", "sonar", "application", "process", "EsManagedProcess.java")
-file = open(file_path, "r")
-code = file.read()
+# file_path = os.path.join("..", "..", "sonarqube", "server", "sonar-main", "src", "main", "java", "org", "sonar", "application", "process", "EsManagedProcess.java")
+# file = open(file_path, "r")
+# code = file.read()
 
-print(code)
+# print(code)
 
+client = genai.Client(api_key="AIzaSyAigsYXpwyvIixD3vMj4suedyh6E02NJGI")    
+chat = client.chats.create(model="gemini-2.0-flash")
 
-client = genai.Client(
-  api_key="AIzaSyAigsYXpwyvIixD3vMj4suedyh6E02NJGI"
+response = chat.send_message("Remember this number 35. If I ask you for this remembered number, put down 35.")
+print(response.text)
+response = chat.send_message("What is the remembered number?")
+print (response.text)
+
+completion = client.models.generate_content(
+  model="gemini-2.0-flash",
+  contents=  ". Here is some code that has been written in java. Please make this code look more professional."
+
 )
 
 completion = client.models.generate_content(
   model="gemini-2.0-flash",
-  contents= str(code) + ". Here is some code that has been written in java. Please make this code look more professional."
+  contents= "Remember this number 35. If I ask you for this remembered number, put down 35."
 
 )
+print(completion.text)
 
-text = completion.text
+completion = client.models.generate_content(
+  model="gemini-2.0-flash",
+  contents= "What is the remembered number?"
+
+)
+print(completion.text)
+
+
 print(text)
 groups = text.split("```") 
 print(groups)  # Output: [Description, code, excess]
